@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAuth } from "@/context/Auth/AuthProvider";
-import { RegistrationAction } from "@/context/Auth/StateManagement/AuthActions";
+import { RegistrationAction } from "@/context/Auth/Services/AuthActions";
 import HomeLayout from "@/components/layouts/HomeLayout";
 
 export default function Page() {

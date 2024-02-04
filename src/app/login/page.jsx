@@ -1,6 +1,6 @@
 "use client";
 import { useAuth } from "@/context/Auth/AuthProvider";
-import { LoginAction } from "@/context/Auth/StateManagement/AuthActions";
+import { LoginAction } from "@/context/Auth/Services/AuthActions";
 import { useState } from "react";
 import FullScreenLoader from "@/components/loaders/FullScreenLoader";
 import HomeLayout from "@/components/layouts/HomeLayout";

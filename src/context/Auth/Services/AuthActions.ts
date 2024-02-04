@@ -23,23 +23,19 @@ export const LoginAction = async (
       user.password
     );
     dispatch({ type: LOGIN_SUCCESS, payload: authenticated });
-    toast.info(
-      "Hemos enviado un correo de confirmación, por favor revisa tu bandeja de entrada.",
-      {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        icon: false,
-        theme: "colored",
-      }
-    );
+    toast.info("👋 Welcome " + authenticated.name, {
+      position: "top-center",
+      autoClose: 5000,
+      hideProgressBar: true,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      icon: false,
+      theme: "colored",
+    })
   } catch (error) {
     dispatch({ type: LOGIN_ERROR, payload: error.response.data.error });
-    console.log(error);
   }
 };
 
@@ -55,8 +51,21 @@ export const RegistrationAction = async (
       user.name
     );
     dispatch({ type: REGISTRATION_SUCCESS, payload: registered });
+    toast.info(
+      "Hemos enviado un correo de confirmación, por favor revisa tu bandeja de entrada.",
+      {
+        position: "top-center",
+        autoClose: 5000,
+        hideProgressBar: true,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        icon: false,
+        theme: "colored",
+      }
+    );
   } catch (error) {
-    console.log(error);
     dispatch({ type: REGISTRATION_ERROR, payload: error.response.data.error });
   }
 };

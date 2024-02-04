@@ -1,6 +1,6 @@
 "use client"
 import { createContext , useReducer, useContext } from 'react';
-import { AuthReducer } from './StateManagement/AuthReducer';
+import { AuthReducer } from './Services/AuthReducer';
 const AuthContext = createContext();
 
 const initialState = {
