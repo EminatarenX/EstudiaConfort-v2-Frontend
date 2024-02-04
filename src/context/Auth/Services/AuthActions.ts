@@ -6,7 +6,18 @@ import {
   REGISTRATION_SUCCESS,
   REGISTRATION_ERROR,
 } from "./AuthTypes";
-import { toast } from "react-toastify";
+import { toast, ToastOptions } from "react-toastify";
+const successToast: ToastOptions<unknown> = {
+  position: "top-center",
+  autoClose: 5000,
+  hideProgressBar: true,
+  closeOnClick: true,
+  pauseOnHover: true,
+  draggable: true,
+  progress: undefined,
+  icon: false,
+  theme: "colored",
+};
 
 import {
   authUserController,
@@ -23,17 +34,7 @@ export const LoginAction = async (
       user.password
     );
     dispatch({ type: LOGIN_SUCCESS, payload: authenticated });
-    toast.info("👋 Welcome " + authenticated.name, {
-      position: "top-center",
-      autoClose: 5000,
-      hideProgressBar: true,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      icon: false,
-      theme: "colored",
-    })
+    toast.info("👋 Welcome " + authenticated.name, successToast);
   } catch (error) {
     dispatch({ type: LOGIN_ERROR, payload: error.response.data.error });
   }
@@ -53,17 +54,7 @@ export const RegistrationAction = async (
     dispatch({ type: REGISTRATION_SUCCESS, payload: registered });
     toast.info(
       "Hemos enviado un correo de confirmación, por favor revisa tu bandeja de entrada.",
-      {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: true,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-        icon: false,
-        theme: "colored",
-      }
+      successToast
     );
   } catch (error) {
     dispatch({ type: REGISTRATION_ERROR, payload: error.response.data.error });
