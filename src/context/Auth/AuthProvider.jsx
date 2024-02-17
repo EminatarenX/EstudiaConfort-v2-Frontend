@@ -1,13 +1,14 @@
 "use client"
 import { createContext , useReducer, useContext } from 'react';
-import { AuthReducer } from './Services/AuthReducer';
+import { AuthReducer } from './Infrastructure/redux/AuthReducer';
 const AuthContext = createContext();
 
 const initialState = {
     user: null,
     isAuth: false,
     loading: null,
-    message: ""
+    message: "",
+    rooms: []
 }
 
 export default function AuthProvider({ children }){

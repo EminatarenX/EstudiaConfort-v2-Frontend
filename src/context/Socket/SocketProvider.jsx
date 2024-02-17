@@ -1,27 +1,27 @@
-"use client"
-import {createContext, useContext, useEffect, useState} from 'react'
-import { io } from 'socket.io-client'
+"use client";
+import { createContext, useContext, useEffect, useState } from "react";
+import { io } from "socket.io-client";
 
-const SocketContext = createContext()
+const SocketContext = createContext();
 
-export default function SocketProvider({children}) {
-    const [socket, setSocket] = useState(null)
+export default function SocketProvider({ children }) {
+  const [socket, setSocket] = useState(null);
 
-    useEffect(() => {
-        const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL)
-        setSocket(newSocket)
+  useEffect(() => {
+    const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL);
+    setSocket(newSocket);
 
-        return () => newSocket.close()
-    },[])
+    return () => newSocket.close();
+  }, []);
   return (
     <SocketContext.Provider
-        value={{
-            socket
-        }}
+      value={{
+        socket,
+      }}
     >
-        {children}
+      {children}
     </SocketContext.Provider>
-  )
+  );
 }
 
-export const useSocket = () => useContext(SocketContext)
+export const useSocket = () => useContext(SocketContext);

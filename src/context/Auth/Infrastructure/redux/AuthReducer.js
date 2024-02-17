@@ -4,7 +4,10 @@ import {
     LOGIN_SUCCESS,
     REGISTRATION,
     REGISTRATION_ERROR,
-    REGISTRATION_SUCCESS
+    REGISTRATION_SUCCESS,
+    GET_ALL_ROOMS_USER,
+    GET_ALL_ROOMS_USER_SUCCESS,
+    GET_ALL_ROOMS_USER_ERROR
  } from "./AuthTypes";
 
 
@@ -18,6 +21,7 @@ export function AuthReducer(state, action) {
             }
         case LOGIN_ERROR: 
         case REGISTRATION_ERROR:
+        case GET_ALL_ROOMS_USER_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -41,6 +45,18 @@ export function AuthReducer(state, action) {
             return {
                 ...state,
                 loading: false,
+            }
+        case GET_ALL_ROOMS_USER:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case GET_ALL_ROOMS_USER_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                rooms: action.payload
             }
        
         default: 
