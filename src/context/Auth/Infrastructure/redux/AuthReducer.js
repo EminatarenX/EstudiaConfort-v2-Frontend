@@ -7,7 +7,13 @@ import {
     REGISTRATION_SUCCESS,
     GET_ALL_ROOMS_USER,
     GET_ALL_ROOMS_USER_SUCCESS,
-    GET_ALL_ROOMS_USER_ERROR
+    GET_ALL_ROOMS_USER_ERROR,
+    GET_ROOM_INFO,
+    GET_ROOM_INFO_SUCCESS,
+    GET_ROOM_INFO_ERROR,
+    WATER_INTERRUPTOR,
+    WATER_INTERRUPTOR_SUCCESS,
+    WATER_INTERRUPTOR_ERROR
  } from "./AuthTypes";
 
 
@@ -21,7 +27,9 @@ export function AuthReducer(state, action) {
             }
         case LOGIN_ERROR: 
         case REGISTRATION_ERROR:
+        case GET_ROOM_INFO_ERROR:
         case GET_ALL_ROOMS_USER_ERROR:
+        case WATER_INTERRUPTOR_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -57,6 +65,33 @@ export function AuthReducer(state, action) {
                 ...state,
                 loading: false,
                 rooms: action.payload
+            }
+        case GET_ROOM_INFO:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case GET_ROOM_INFO_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                room: action.payload
+            }
+        case WATER_INTERRUPTOR:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case WATER_INTERRUPTOR_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                room: {
+                    ...state.room,
+                    water: action.payload
+                }
             }
        
         default: 

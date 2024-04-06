@@ -1,5 +1,6 @@
 import React from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 
 export default function Room({room}) {
   return (
@@ -17,11 +18,13 @@ export default function Room({room}) {
       />  
 
       <div className=''>
+        <Link href={`/dashboard/room/${room.id}`}>
           <h3 className='text-center text-lg text-neutral-600'>{`${room?.name ? room.name : 'undefined'}`}</h3>
+        </Link>
 
           <div className='flex justify-between'>
             <div>
-              <span className='text-neutral-600 text-sm tracking-wider'>energy: {room.energy ? "on": "off"}</span>
+              <span className='text-neutral-600 text-sm tracking-wider'>gas: {room.energy ? "on": "off"}</span>
             </div>
             <div>
               <span className='text-neutral-600 text-sm tracking-wider'>water: {room.water ? "on": "off"}</span>

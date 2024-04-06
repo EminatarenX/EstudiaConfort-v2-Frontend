@@ -8,7 +8,7 @@ export default function FullScreenLoader({ loading }) {
     clase = "notLoading";
   }
   return (
-    <div className={`initialLoading ${clase} flex justify-center items-center`}>
+    <div className={`initialLoading ${clase} flex justify-center items-center z-30`}>
       <div className="loading-child" />
     </div>
   );

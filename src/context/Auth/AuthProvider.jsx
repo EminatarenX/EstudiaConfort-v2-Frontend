@@ -8,7 +8,8 @@ const initialState = {
     isAuth: false,
     loading: null,
     message: "",
-    rooms: []
+    rooms: [],
+    room: null
 }
 
 export default function AuthProvider({ children }){

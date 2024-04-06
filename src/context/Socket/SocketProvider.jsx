@@ -8,7 +8,7 @@ export default function SocketProvider({ children }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    const newSocket = io(process.env.NEXT_PUBLIC_BACKEND_URL);
+    const newSocket = io("http://localhost:4001");
     setSocket(newSocket);
 
     return () => newSocket.close();

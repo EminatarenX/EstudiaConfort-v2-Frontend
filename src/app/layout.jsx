@@ -18,13 +18,18 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
           <UserProvider>
-            <SocketProvider>
-              <ToastContainer />
-              {children}
-            </SocketProvider>
+            {
+              //<SocketProvider>
+
+            }
+            <ToastContainer />
+            {children}
+            {
+              //</SocketProvider>
+            }
           </UserProvider>
         </AuthProvider>
       </body>
-    </html>
+    </html >
   );
 }
