@@ -1,7 +1,7 @@
 "use client";
 import { useState } from "react";
 import { useAuth } from "@/context/Auth/AuthProvider";
-import { RegistrationAction } from "@/context/Auth/Services/AuthActions";
+
 import HomeLayout from "@/components/layouts/HomeLayout";
 
 export default function Page() {
@@ -13,14 +13,7 @@ export default function Page() {
 
   const handleRegistered = async (e) => {
     e.preventDefault();
-    if ([email, password, name].includes(""))
-      return alert("Todos los campos son requeridos");
-    const user = {
-      email,
-      password,
-      name,
-    };
-    RegistrationAction(dispatch, user);
+
   };
   return (
     <HomeLayout>
