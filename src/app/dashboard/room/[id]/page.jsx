@@ -9,9 +9,8 @@ let data = [
   { time: 0, value: 0 }
 ];
 
-export default function page({ params }) {
-  const { state, dispatch } = useAuth();
-  const [room, setRoom] = useState(null);
+export default function Page({ params }) {
+  const { state, dispatch } = useAuth(); const [room, setRoom] = useState(null);
   const [sensores, setSensores] = useState({
     agua: 0,
     gas: 0,
@@ -19,15 +18,15 @@ export default function page({ params }) {
   })
   const [dataReal, setDataReal] = useState([{ time: 0, value: 0 }]);
 
-  const handleWaterInterruptor = async() => {
+  const handleWaterInterruptor = async () => {
     let payload = []
-      if(room.water) {
-        payload = { water_bomb: 0}
-      }else {
-        payload = { water_bomb: 1}
-      }
+    if (room.water) {
+      payload = { water_bomb: 0 }
+    } else {
+      payload = { water_bomb: 1 }
+    }
 
-      await WaterInterruptorAction(dispatch, params.id, payload);
+    await WaterInterruptorAction(dispatch, params.id, payload);
   }
 
 
@@ -79,7 +78,7 @@ export default function page({ params }) {
               <div>
                 <button type="button"
                   onClick={handleWaterInterruptor}
-                className={`py-5 mt-5 text-xl w-full rounded ${room.water ? "bg-rose-500" : "bg-blue-500"} text-white`}>
+                  className={`py-5 mt-5 text-xl w-full rounded ${room.water ? "bg-rose-500" : "bg-blue-500"} text-white`}>
                   {
                     room.water ? 'Cerrar llave de paso' : 'Abrir llave de paso'
                   }
@@ -119,7 +118,7 @@ export default function page({ params }) {
           </>
         )}
       </section>
-     {!room && <FullScreenLoader />}
+      {!room && <FullScreenLoader />}
     </AdminLayout >
   );
 }

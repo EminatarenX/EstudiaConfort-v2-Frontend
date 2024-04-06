@@ -26,9 +26,7 @@ export default function RootLayout({ children }) {
             {children}
             {
               //</SocketProvider>
-            }
-          </UserProvider>
-        </AuthProvider>
+            } </UserProvider> </AuthProvider>
       </body>
     </html >
   );
