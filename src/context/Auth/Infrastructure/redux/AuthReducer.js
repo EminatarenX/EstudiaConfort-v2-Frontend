@@ -13,7 +13,17 @@ import {
     GET_ROOM_INFO_ERROR,
     WATER_INTERRUPTOR,
     WATER_INTERRUPTOR_SUCCESS,
-    WATER_INTERRUPTOR_ERROR
+    WATER_INTERRUPTOR_ERROR,
+    CHANGE_SENSORS_DATA,
+    EDIT_ROOM,
+    EDIT_ROOM_ERROR,
+    EDIT_ROOM_SUCCESS,
+    DELETE_ROOM,
+    DELETE_ROOM_ERROR,
+    DELETE_ROOM_SUCCESS,
+    CREATE_ROOM,
+    CREATE_ROOM_ERROR,
+    CREATE_ROOM_SUCCESS
  } from "./AuthTypes";
 
 
@@ -30,6 +40,9 @@ export function AuthReducer(state, action) {
         case GET_ROOM_INFO_ERROR:
         case GET_ALL_ROOMS_USER_ERROR:
         case WATER_INTERRUPTOR_ERROR:
+        case EDIT_ROOM_ERROR:
+        case DELETE_ROOM_ERROR:
+        case CREATE_ROOM_ERROR:
             return {
                 ...state,
                 loading: false,
@@ -92,6 +105,47 @@ export function AuthReducer(state, action) {
                     ...state.room,
                     water: action.payload
                 }
+            }
+        case CHANGE_SENSORS_DATA: 
+            return {
+                ...state,
+                sensors: action.payload
+            }
+        case EDIT_ROOM:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case EDIT_ROOM_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                room: action.payload
+            }
+        case DELETE_ROOM:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case DELETE_ROOM_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                rooms: state.rooms.filter( room => room.id !== action.payload)
+            }
+        case CREATE_ROOM:
+            return {
+                ...state,
+                loading: true,
+                error: null
+            }
+        case CREATE_ROOM_SUCCESS:
+            return {
+                ...state,
+                loading: false,
+                rooms: [...state.rooms, action.payload]
             }
        
         default: 

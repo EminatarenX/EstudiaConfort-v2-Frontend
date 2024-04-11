@@ -13,7 +13,17 @@ import {
   GET_ROOM_INFO_SUCCESS,
   WATER_INTERRUPTOR,
   WATER_INTERRUPTOR_ERROR,
-  WATER_INTERRUPTOR_SUCCESS
+  WATER_INTERRUPTOR_SUCCESS,
+  CHANGE_SENSORS_DATA,
+  EDIT_ROOM,
+  EDIT_ROOM_ERROR,
+  EDIT_ROOM_SUCCESS,
+  DELETE_ROOM,
+  DELETE_ROOM_ERROR,
+  DELETE_ROOM_SUCCESS,
+  CREATE_ROOM,
+  CREATE_ROOM_ERROR,
+  CREATE_ROOM_SUCCESS
 
 } from "./AuthTypes";
 import { toast, ToastOptions } from "react-toastify";
@@ -35,7 +45,10 @@ import {
   getAllRoomsUserController,
   registrationController,
   getRoomController,
-  waterInterruptorController
+  waterInterruptorController,
+  editRoomController,
+  deleteRoomController,
+  createRoomController
 } from "../Dependencies";
 export const LoginAction = async (
   dispatch: any,
@@ -134,5 +147,62 @@ export const WaterInterruptorAction = async (dispatch: any, roomId: string, payl
     
   } catch (error) {
     
+  }
+}
+
+export const changeStateSensorsAction = async (dispatch: any, payload: any) => {
+  dispatch({ type: CHANGE_SENSORS_DATA, payload})
+}
+
+export const editRoomAction = async (dispatch: any, payload: {name: string, roomId: string, topic: string, topic_salida: string}) => {
+  try {
+    dispatch({ type: EDIT_ROOM })
+    const token = localStorage.getItem('token')
+    const {data} = await editRoomController.run(token, payload);
+    if (data.errors) {
+      dispatch({ type: EDIT_ROOM_ERROR, payload: data.errors[0].message });
+      return false
+    }
+    const room = data.updateRoom.room
+    dispatch({ type: EDIT_ROOM_SUCCESS, payload: room})
+    toast.info(" 👍 Habitación actualizada", successToast)
+    return true
+
+  } catch (error) {
+    dispatch({ type: EDIT_ROOM_ERROR, payload: "Internal server Error" })
+  }
+}
+
+export const deleteRoomAction = async (dispatch: any, roomId: string) => {
+  try {
+    dispatch({ type: DELETE_ROOM })
+    const token = localStorage.getItem('token')
+    const data = await deleteRoomController.run(token, roomId);
+    if (data.errors) {
+      dispatch({ type: DELETE_ROOM_ERROR, payload: data.errors[0].message });
+    }
+    dispatch({ type: DELETE_ROOM_SUCCESS, payload: roomId })
+    toast.info("👋 Habitación eliminada", successToast)
+    return true
+  } catch (error) {
+    return error
+  }
+}
+
+export const createRoomAction = async (dispatch: any, payload: {name: string, topic: string, topic_salida: string}) => {
+  try {
+    dispatch({ type: CREATE_ROOM })
+    const token = localStorage.getItem('token')
+    const {data} = await createRoomController.run(token, payload);
+    if (data.errors) {
+      dispatch({ type: CREATE_ROOM_ERROR, payload: data.errors[0].message });
+      toast.error("👎 Error al crear la habitación", successToast)
+    }
+    const room = data.createRoom
+    dispatch({ type: CREATE_ROOM_SUCCESS, payload: room})
+    toast.info("👍 Habitación creada", successToast)
+    return true
+  } catch (error) {
+    return error
   }
 }

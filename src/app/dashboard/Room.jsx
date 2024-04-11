@@ -22,25 +22,17 @@ export default function Room({room}) {
           <h3 className='text-center text-lg text-neutral-600'>{`${room?.name ? room.name : 'undefined'}`}</h3>
         </Link>
 
-          <div className='flex justify-between'>
-            <div>
-              <span className='text-neutral-600 text-sm tracking-wider'>gas: {room.energy ? "on": "off"}</span>
-            </div>
-            <div>
-              <span className='text-neutral-600 text-sm tracking-wider'>water: {room.water ? "on": "off"}</span>
-            </div>
-          </div>
           <div className='flex justify-center'> 
             <span className='text-neutral-600 text-sm tracking-wider flex items-center'>
               {
-                room.user ? (
+                room.water ? (
                   <div className={'bg-green-500 w-3 h-3  rounded-full mr-1'}></div> 
                 ) : (
                   <div className='bg-neutral-600 w-2 h-2  rounded-full mr-1'></div>
                 )
                 
               }
-              user: {room.user ? "on": "off"}</span>
+              water</span>
              
           </div>
       </div>

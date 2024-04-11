@@ -31,12 +31,9 @@ export const GET_ALL_ROOMS_QUERY = () => {
                 findRooms{
                     id
                     name
-                    tools {
-                      id
-                      state
-                      roomId
-                      name
-                    }
+                    water
+                    topic
+                    topic_salida
                     userId
                   
                 }
@@ -54,6 +51,8 @@ export const GET_ROOM_QUERY = (id: string) => {
           id
           name
           water
+          topic
+          topic_salida
           userId
         }
       }
@@ -80,6 +79,67 @@ export const WATER_INTERRUPTOR_MUTATION = (roomId: string, payload: { water_bomb
     input: {
       roomId,
       payload
+    }
+  }
+})
+
+export const EDIT_ROOM_MUTATION = (payload: { name: string, topic: string, topic_salida: string, roomId: string }) => ({
+  query: `
+    mutation Update($input: updateInput) {
+      updateRoom(input: $input) {
+        code
+        success
+        message
+        room {
+          id
+        name
+        topic
+        topic_salida
+        userId
+        water
+        }
+      }
+    }
+  `,
+  variables:{
+    input: {
+      ...payload
+    }
+  }
+})
+
+export const DELETE_ROOM_MUTATION = (roomId: string) => ({
+  query: `
+    mutation DeleteRoom($input: RoomId) {
+      deleteRoom(input: $input) {
+        code
+        message
+        success
+      }
+    }
+  `,
+  variables: {
+    input: {
+      roomId
+    }
+  }
+})
+
+export const CREATE_ROOM_MUTATION = (payload: { name: string, topic: string, topic_salida: string }) => ({
+  query: `
+    mutation CreateRoom($input: RoomInput) {
+      createRoom(input: $input) {
+        id
+        name
+        topic,
+        topic_salida
+        userId
+      }
+    }
+  `,
+  variables: {
+    input: {
+      ...payload
     }
   }
 })

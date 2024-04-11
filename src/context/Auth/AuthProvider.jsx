@@ -9,7 +9,12 @@ const initialState = {
     loading: null,
     message: "",
     rooms: [],
-    room: null
+    room: null,
+    sensors: {
+        waterFlow: 0,
+        gas: 0,
+        ultrasonic: 0
+    }
 }
 
 export default function AuthProvider({ children }){

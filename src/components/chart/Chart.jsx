@@ -8,11 +8,11 @@ export default function LineChart({ initialDataChart }) {
   useEffect(() => {
     if (!chartContainerRef.current || initialDataChart.length == 0) return
     const initialData = initialDataChart
-    const lastTenData = initialDataChart.slice(-10)
+    const lastTenData = initialDataChart.slice(-20)
 
     const chart = createChart(chartContainerRef.current, {
       width: chartContainerRef.current.clientWidth,
-      height: 250,
+      height: 205,
       layout: {
         background: { type: 'solid', color: "transparent" },
         textColor: '#d1d4dc',

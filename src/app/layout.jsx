@@ -9,15 +9,16 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
   title: "Aquacare - Save Water, Save Life",
-  description: "Aqua Save is a water management system that helps you save water and save life.",
+  description:
+    "Aqua Save is a water management system that helps you save water and save life.",
   icons: {
     icon: [
       {
         url: "/rom-s.png",
-        href: "/room-s.png"
-      }
-    ]
-  }
+        href: "/room-s.png",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -26,16 +27,13 @@ export default function RootLayout({ children }) {
       <body className={inter.className}>
         <AuthProvider>
           <UserProvider>
-            {
-              //<SocketProvider>
-
-            }
-            <ToastContainer />
-            {children}
-            {
-              //</SocketProvider>
-            } </UserProvider> </AuthProvider>
+            <SocketProvider>
+              <ToastContainer />
+                {children}
+            </SocketProvider>
+          </UserProvider>{" "}
+        </AuthProvider>
       </body>
-    </html >
+    </html>
   );
 }
