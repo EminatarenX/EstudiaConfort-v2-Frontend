@@ -13,7 +13,7 @@ export default function SocketProvider({ children }) {
   const { state, dispatch } = useAuth();
 
   useEffect(() => {
-    const newSocket = io(process.env.NEXT_PUBLIC_SOCKET_URL | "http://localhost:4001");
+    const newSocket = io(process.env.NEXT_PUBLIC_SOCKET_URL || "http://localhost:4001");
     setSocket(newSocket);
 
 
