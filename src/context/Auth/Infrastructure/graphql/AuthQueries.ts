@@ -1,3 +1,28 @@
+export const REGISTRATION_QUERY = (email: string, password: string) => ({
+  query: `
+  mutation CreateUser($input: UserInput) {
+    createUser(input: $input) {
+      code
+      message
+      status
+      user {
+        email
+        createdAt
+        id
+      }
+    }
+  }
+  
+  
+  `,
+  variables: {
+    input: {
+      email,
+      password
+    }
+  }
+})
+
 export const LOGIN_QUERY = (email: string, password: string) => {
   return {
     query: `

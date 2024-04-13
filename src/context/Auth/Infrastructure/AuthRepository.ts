@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IAuthRepository } from "../Domain/IAuthRepository";
-import { LOGIN_QUERY, GET_ALL_ROOMS_QUERY, GET_ROOM_QUERY, WATER_INTERRUPTOR_MUTATION, EDIT_ROOM_MUTATION, DELETE_ROOM_MUTATION, CREATE_ROOM_MUTATION } from "./graphql/AuthQueries";
+import { LOGIN_QUERY, GET_ALL_ROOMS_QUERY, GET_ROOM_QUERY, WATER_INTERRUPTOR_MUTATION, EDIT_ROOM_MUTATION, DELETE_ROOM_MUTATION, CREATE_ROOM_MUTATION, REGISTRATION_QUERY } from "./graphql/AuthQueries";
 
 export class AuthRepository implements IAuthRepository {
   private api: any;
@@ -14,12 +14,8 @@ export class AuthRepository implements IAuthRepository {
     return data;
   }
 
-  async registration(email: string, password: string, name: string) {
-    const { data } = await this.api.post('/users', {
-      email,
-      password,
-      name
-    })
+  async registration(email: string, password: string) {
+    const { data } = await this.api.post('/', REGISTRATION_QUERY(email, password))
 
     return data;
   }

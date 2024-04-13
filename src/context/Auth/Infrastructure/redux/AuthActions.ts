@@ -82,18 +82,24 @@ export const RegistrationAction = async (
 ) => {
   try {
     dispatch({ type: REGISTRATION });
-    const { user: registered } = await registrationController.run(
+    const { data } = await registrationController.run(
       user.email,
       user.password,
-      user.name
     );
-    dispatch({ type: REGISTRATION_SUCCESS, payload: registered });
+    console.log(data.createUser)
+    if(data.createUser.code == 400) {
+      dispatch({ type: REGISTRATION_ERROR, payload: data.createUser.message });
+      return false
+    }
+    dispatch({ type: REGISTRATION_SUCCESS, payload: true });
     toast.info(
-      "Hemos enviado un correo de confirmación, por favor revisa tu bandeja de entrada.",
+      "🙌 Se ha registrado correctamente, por favor inicie sesión",
       successToast
     );
+    return true
   } catch (error) {
     dispatch({ type: REGISTRATION_ERROR, payload: error.response.data.error });
+    return false
   }
 };
 export const GetAllRoomsUserAction = async (dispatch: any) => {
