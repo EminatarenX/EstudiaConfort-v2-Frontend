@@ -56,14 +56,13 @@ export const LoginAction = async (
 ) => {
   try {
     dispatch({ type: LOGIN });
-    const data = await authUserController.run(
+    const {data} = await authUserController.run(
       user.email,
       user.password
     );
-    console.log(data);
 
-    if (data.errors) {
-      dispatch({ type: LOGIN_ERROR, payload: data.errors[0].message });
+    if (data.auth.code == 400) {
+      dispatch({ type: LOGIN_ERROR, payload: data.auth.message });
       return false
     }
     const { user: authenticated } = data.data.auth
@@ -86,7 +85,6 @@ export const RegistrationAction = async (
       user.email,
       user.password,
     );
-    console.log(data.createUser)
     if(data.createUser.code == 400) {
       dispatch({ type: REGISTRATION_ERROR, payload: data.createUser.message });
       return false
