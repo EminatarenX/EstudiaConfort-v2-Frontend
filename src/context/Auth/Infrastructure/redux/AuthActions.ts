@@ -65,7 +65,7 @@ export const LoginAction = async (
       dispatch({ type: LOGIN_ERROR, payload: data.auth.message });
       return false
     }
-    const { user: authenticated } = data.data.auth
+    const { user: authenticated } = data.auth
     localStorage.setItem('token', authenticated.jwt)
     dispatch({ type: LOGIN_SUCCESS, payload: authenticated });
     toast.info("👋 Welcome", successToast);
