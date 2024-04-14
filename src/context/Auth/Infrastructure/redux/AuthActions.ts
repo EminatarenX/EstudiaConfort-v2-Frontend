@@ -71,6 +71,7 @@ export const LoginAction = async (
     toast.info("👋 Welcome", successToast);
     return true
   } catch (error) {
+    console.log(error)
     dispatch({ type: LOGIN_ERROR, payload: "Internal Server Error" });
   }
 };
